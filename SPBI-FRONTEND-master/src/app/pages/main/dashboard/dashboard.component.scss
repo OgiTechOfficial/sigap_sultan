@@ -1,0 +1,48 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+// Custom select enhancements
+select {
+  background-image: none !important;
+  cursor: pointer;
+  
+  &:hover {
+    border-color: #cbd5e1;
+  }
+  
+  &:focus {
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.1);
+  }
+}
+
+// Municipal card styling
+.grid {
+  & > div {
+    will-change: transform, box-shadow;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
+      border-color: #cbd5e1;
+    }
+  }
+}
+
+// Date/Month Picker enhancements
+.absolute {
+  animation: fadeIn 0.2s ease-out;
+}

@@ -1,109 +1,60 @@
-<nav class="bg-cover header-bg-image bg-no-repeat bg-center">
-  <div class="mx-auto w-full px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between">
-      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-        <!-- Mobile menu button-->
-        <button type="button"
-          class="relative inline-flex items-center justify-center rounded-md p-2 text-white hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-          aria-controls="mobile-menu" aria-expanded="false" (click)="hideNavbar = !hideNavbar">
-          <span class="absolute -inset-0.5"></span>
-          <span class="sr-only">Open main menu</span>
-          <svg [ngClass]="hideNavbar ? 'block' : 'hidden'" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-            aria-hidden="true">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-          </svg>
-          <svg [ngClass]="hideNavbar ? 'hidden' : 'block'" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
-              aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
-        </button>
-      </div>
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-around">
-        <div class="flex flex-shrink-0 items-center">
-          <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-            alt="Your Company">
-        </div>
-        <div class="hidden sm:ml-6 sm:block">
-          <div class="flex space-x-4">
-            <ng-container *ngFor="let menu of menus">
-              <a [routerLink]="menu.path" routerLinkActive="bg-gray-900 text-white"
-                [routerLinkActiveOptions]="{exact: true}"
-                class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-                {{menu.name}}
-              </a>
-            </ng-container>
+<nav class="bg-[#0A5C95] shadow-md border-b border-blue-700/30">
+  <div class="mx-auto w-full px-4 sm:px-6 lg:px-8">
+    <div class="flex h-20 items-center justify-between">
+      
+      <!-- Left side: Logos and Title Branding -->
+      <div class="flex items-center space-x-3">
+        <!-- Logo Sulsel -->
+        <img class="h-12 w-auto object-contain filter drop-shadow" 
+             src="https://upload.wikimedia.org/wikipedia/commons/e/e4/Coat_of_arms_of_South_Sulawesi.svg" 
+             alt="Logo Sulawesi Selatan">
+        <!-- Logo BI -->
+        <img class="h-10 w-auto object-contain bg-white/10 rounded px-1.5 py-0.5 filter drop-shadow" 
+             src="https://upload.wikimedia.org/wikipedia/commons/2/23/Bank_Indonesia_logo.svg" 
+             alt="Logo Bank Indonesia">
+        
+        <!-- Divider -->
+        <div class="h-10 w-[1px] bg-white/20"></div>
+        
+        <!-- Title Text -->
+        <div class="flex flex-col text-white">
+          <div class="flex items-center space-x-1.5">
+            <span class="text-lg font-extrabold tracking-wider text-yellow-300 drop-shadow-sm font-sans">SIGAP SULTAN</span>
+            <span class="text-[10px] uppercase font-semibold bg-blue-800 text-blue-200 px-1 rounded-sm border border-blue-600/30">Portal Publik</span>
           </div>
-        </div>
-      </div>
-      <div class=" absolute inset-y-0 right-0 hidden sm:flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-        <!-- Profile dropdown -->
-        <div class="relative ml-3">
-          <div>
-            <button type="button" (click)="hideProfileMenu = !hideProfileMenu"
-              class="relative flex content-center items-center text-sm focus:outline-none" id="user-menu-button"
-              aria-expanded="false" aria-haspopup="true">
-              <span class="absolute -inset-1.5"></span>
-              <span class="sr-only">Open user menu</span>
-              <span class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">
-                Username
-              </span>
-              <svg [@rotateMenu]="!hideProfileMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-gray-300 hover:stroke-white">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-              </svg>
-            </button>
-          </div>
-          <div [@openCloseProfile]="!hideProfileMenu"
-            class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-            <a routerLink="" routerLinkActive="bg-gray-100" class="block px-4 py-2 text-sm text-gray-700"
-              role="menuitem" tabindex="-1" id="user-menu-item-0" [routerLinkActiveOptions]="{exact: true}">
-              Your Profile
-            </a>
-            <a (click)="signout()" class="block px-4 py-2 text-sm text-gray-700" role="button" tabindex="-1"
-              id="user-menu-item-2">Sign out</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Mobile menu, show/hide based on menu state. -->
-  <div class="sm:hidden" [@openCloseMobileMenu]="!hideNavbar" id="mobile-menu">
-    <div class="space-y-1 px-2 pb-3 pt-2 flex flex-col">
-      <ng-container *ngFor="let menu of menus">
-        <a [routerLink]="menu.path" routerLinkActive="bg-gray-900 text-white" [routerLinkActiveOptions]="{exact: true}"
-          class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-          {{menu.name}}
-        </a>
-      </ng-container>
-      <!-- Profile dropdown -->
-      <div class="flex flex-col">
-        <button type="button" (click)="hideProfileMenu = !hideProfileMenu"
-          class="relative flex content-center items-center text-sm focus:outline-none" id="user-menu-button"
-          aria-expanded="false" aria-haspopup="true">
-          <span class="absolute -inset-1.5"></span>
-          <span class="sr-only">Open user menu</span>
-          <span class="text-gray-300 hover:bg-gray-700 hover:text-white px-3 py-2 text-sm font-medium">
-            Username
+          <span class="text-[11px] font-medium tracking-wide text-blue-100 uppercase opacity-90 leading-tight">
+            Sistem Informasi Harga dan Pasokan Pangan<br>Provinsi Sulawesi Selatan
           </span>
-          <svg [@rotateMenu]="!hideProfileMenu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-            stroke-width="1.5" stroke="currentColor" class="w-6 h-6 stroke-gray-300 hover:stroke-white">
-            <path stroke-linecap="round" stroke-linejoin="round" d="m19.5 8.25-7.5 7.5-7.5-7.5" />
-          </svg>
-        </button>
+        </div>
       </div>
-      <div
-        [@openCloseMobileMenu]="!hideProfileMenu"
-        class="pl-5 flex-col"
-        role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-        <a routerLink="" routerLinkActive="bg-gray-900 text-white" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-sm font-medium"
-          role="menuitem" tabindex="-1" id="user-menu-item-0" [routerLinkActiveOptions]="{exact: true}">
-          Your Profile
-        </a>
-        <a (click)="signout()" class="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md text-sm font-medium" role="button" tabindex="-1"
-          id="user-menu-item-2">Sign out</a>
+
+      <!-- Center/Right: Navigation Tabs & Log In -->
+      <div class="flex items-center space-x-6">
+        <!-- Navigation links -->
+        <div class="hidden md:flex space-x-2">
+          <ng-container *ngFor="let menu of menus">
+            <a [routerLink]="menu.path" 
+               [queryParams]="{tab: menu.name === 'Tabel Harga' ? 'harga' : menu.name === 'Tabel Neraca' ? 'neraca' : 'laporan'}"
+               routerLinkActive="bg-white/10 text-white font-semibold border-b-2 border-yellow-300"
+               [routerLinkActiveOptions]="{exact: false}"
+               class="text-blue-100 hover:bg-white/5 hover:text-white rounded-md px-3.5 py-2 text-sm font-medium transition-all duration-200">
+              {{menu.name}}
+            </a>
+          </ng-container>
+        </div>
+
+        <!-- Log in / Profile button -->
+        <div class="flex items-center">
+          <a routerLink="/login" 
+             class="bg-white text-[#0A5C95] hover:bg-blue-50 font-bold px-5 py-2 rounded text-sm shadow transition-all duration-200 flex items-center space-x-1.5 border border-white">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-4 h-4">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+            </svg>
+            <span>Log in</span>
+          </a>
+        </div>
       </div>
+
     </div>
   </div>
 </nav>
