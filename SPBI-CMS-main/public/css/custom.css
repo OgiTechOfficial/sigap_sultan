@@ -1,0 +1,166 @@
+.login-welcome{
+    font-weight: 600;
+    font-size: 30px;
+    color: #101828;
+}
+.login-info{
+    font-weight: 600;
+    font-size: 16px;
+    color: #767778;
+}
+.hello-info{
+    font-weight: 500;
+    font-size: 16px;
+    color: #989898;
+}
+
+.form-login{
+    font-size: 16px;
+    padding-left: 40px;
+}
+.input-icons {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.input-icons i {
+    position: absolute;
+}
+
+.icon {
+    padding: 10px;
+    min-width: 40px;
+}
+
+.btn-custom-primary, .btn-custom-primary:hover{
+    background-color:#005395
+}
+
+.nav-link-custom{
+    color:#5E5873;
+    padding: 1rem
+}
+
+.nav-link-custom-active{
+    color:#005395;
+    padding:1rem
+}
+
+.sidebar-top-custom{
+    color:#fff;
+    background-image: linear-gradient(to right, #074A92, #165C94, #3484C5);
+    padding:1rem
+}
+
+.nav-item-custom{
+    margin:1rem;
+    padding:0.5rem 0
+}
+
+.nav-item-custom-bt{
+    margin:0 1rem 1rem 1rem;
+    padding:0.5rem 0
+}
+
+.active-custom{
+    background-color: #F8F8F8;
+}
+
+.size-sultan{
+    font-size:18px
+}
+
+.color-white{
+    color:#fff
+}
+
+.color-yellow{
+    color:#F4CC22
+}
+
+.sidebar .sidebar-brand-custom {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05rem;
+  z-index: 1;
+}
+
+.nav-custom span{
+    padding-left:8px
+}
+
+.weight700{
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.weight60020{
+    font-weight: 600;
+    font-size: 20px;
+    color: #1C1D1F;
+}
+
+.dataTable > thead {
+    background-color: #EAECF0;
+}
+
+.margin-10{
+    margin-right: 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000000;
+}
+
+.btn-save-custom{
+    padding:0.375rem 2rem;
+}
+
+.info-custom-hitam{
+    font-weight: 600;
+    color:#101828;
+    font-size: 18px;
+}
+
+.info-custom-grey{
+    font-weight: 400;
+    color:#667085;
+    font-size: 14px;
+}
+
+.custom60014{
+    font-weight: 600;
+    color:#667085;
+    font-size: 14px;
+    border-color:#D0D5DD;
+    background-color: #fff;
+}
+
+.custom50016{
+    color:Grey;
+    font-weight: 500;
+    font-size: 16px;
+}
+
+.border-bottom-blue{
+    border-bottom: solid #005395;
+}
+
+.font70014yellow{
+    color: #FF6711;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.merah60014{
+    font-size: 14px;
+    font-weight: 600;
+    color: #DC4531;
+}
+.hijau60014{
+    font-size: 14px;
+    font-weight: 600;
+    color: #23A65F;
+}

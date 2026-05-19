@@ -1,0 +1,22 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Root path for check API is still alive or not",
+                "produces": [
+                    "text/plain"
+                ],
+                "summary": "Root path",
+                "responses": {
+                    "200": {
+                        "description": "API is alive!"
+                    }
+                }
+            }
+        }
+    }
+}
