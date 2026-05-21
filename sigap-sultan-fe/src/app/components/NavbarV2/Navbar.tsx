@@ -125,29 +125,44 @@ function Navbar() {
           <Button
             variant="subtle"
             fullWidth
-            onClick={() => router.push("/dashboard/price-table")}
+            onClick={() => {
+              toggleDrawer();
+              router.push("/dashboard/price-table");
+            }}
           >
             Tabel Harga
           </Button>
           <Button
             variant="subtle"
             fullWidth
-            onClick={() => router.push("/dashboard/neraca")}
+            onClick={() => {
+              toggleDrawer();
+              router.push("/dashboard/neraca");
+            }}
           >
             Tabel Neraca
           </Button>
           <Button
             variant="subtle"
             fullWidth
-            onClick={() => router.push("/dashboard/report")}
+            onClick={() => {
+              toggleDrawer();
+              router.push("/dashboard/report");
+            }}
           >
-            Unduh Laporan ga dipake
+            Unduh Laporan
           </Button>
 
           <Divider my="sm" />
 
           {!auth.isAuthenticated && (
-            <Button fullWidth onClick={() => router.push("/login")}>
+            <Button
+              fullWidth
+              onClick={() => {
+                toggleDrawer();
+                router.push("/login");
+              }}
+            >
               Log in
             </Button>
           )}
@@ -157,11 +172,21 @@ function Navbar() {
               <Button
                 variant="subtle"
                 fullWidth
-                onClick={() => router.push("/dashboard/profile")}
+                onClick={() => {
+                  toggleDrawer();
+                  router.push("/dashboard/profile");
+                }}
               >
                 Profile
               </Button>
-              <Button variant="subtle" fullWidth onClick={handleLogout}>
+              <Button
+                variant="subtle"
+                fullWidth
+                onClick={() => {
+                  toggleDrawer();
+                  handleLogout();
+                }}
+              >
                 Logout
               </Button>
             </>

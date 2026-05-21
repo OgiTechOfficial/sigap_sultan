@@ -9,9 +9,11 @@
 
 ## 2. Recent Modifications & Bug Fixes
 
-### A. Database Sync & NULL Pointers in Golang
-- **Issue:** The database dump provided by the vendor had missing foreign keys or `NULL` values (e.g., `unit_id` in `tm_commodity`, `assets_relation_id` in `tm_city`). The original Golang code used `INNER JOIN` and strictly mapped to non-pointer Go types, causing `pgx.ErrNoRows` or panics when records didn't match.
-- **Fix Applied:** 
+### A. Database Sync, PostgreSQL Functions, & NULL Pointers in Golang
+- **Issue 1:** The Next.js dashboard graphs for "Tabel Harga" and "Neraca" failed with HTTP 500 errors. This was caused by the backend attempting to call custom PostgreSQL functions (e.g., `get_level_stock_province_cr`, `neraca_defisit_cr`) that did not exist in the default `dev` schema. The `postgres-init/rebuild_schema_and_functions.sql` script specifically creates these functions and seeds the dashboard dummy data into the **`prod`** schema.
+- **Fix 1:** Changed `DB_SCHEME=prod` in `SPBI-BACKEND-main/.env` to point the backend to the correct schema.
+- **Issue 2:** The database dump provided by the vendor had missing foreign keys or `NULL` values (e.g., `unit_id` in `tm_commodity`, `assets_relation_id` in `tm_city`). The original Golang code used `INNER JOIN` and strictly mapped to non-pointer Go types, causing `pgx.ErrNoRows` or panics when records didn't match.
+- **Fix 2:** 
   - Changed `INNER JOIN` to `LEFT JOIN` in multiple query files (e.g., `tm_city_queries.go`, `tm_commodity_queries.go`, `login_repository.go`).
   - Updated Go struct models (`models.TmCity`, `models.TmCommodity`) to use pointer types (e.g., `*int32`) so they can gracefully receive `NULL` from the database.
 

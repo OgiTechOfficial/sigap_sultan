@@ -59,7 +59,7 @@ function SelectDropdownNested<T>(props: Props<T>) {
         )
     )
     .map((item) => (
-      <Stack gap={0} pe={4}>
+      <Stack gap={0} pe={4} key={item.value as string}>
         <Combobox.Option
           value={item.value as string}
           key={item.value as string}
@@ -96,7 +96,7 @@ function SelectDropdownNested<T>(props: Props<T>) {
             group.children?.forEach((item) => {
               if (item.value === val) {
                 onChange(item ?? null);
-                setValue(group?.label ?? null);
+                setValue(item?.label ?? null);
               }
             });
           }
@@ -115,7 +115,10 @@ function SelectDropdownNested<T>(props: Props<T>) {
               <CloseButton
                 size="sm"
                 onMouseDown={(event) => event.preventDefault()}
-                onClick={() => setValue(null)}
+                onClick={() => {
+                  setValue(null);
+                  onChange(null);
+                }}
                 aria-label="Clear value"
               />
             ) : (
