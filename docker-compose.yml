@@ -30,7 +30,7 @@ services:
       - DB_DATABASE=sigap_sultan
       - DB_USERNAME=postgres
       - DB_PASSWORD=password
-      - DB_SCHEMA=prod
+      - DB_SCHEMA=dev
       - API_URL=http://sigap_backend:8080
     depends_on:
       - postgres_db
@@ -39,11 +39,13 @@ services:
 
   frontend:
     build:
-      context: ./SPBI-FRONTEND-master
+      context: ./sigap-sultan-fe
       dockerfile: Dockerfile
     container_name: sigap_frontend
     ports:
-      - "4200:4200"
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_BASE_API_URL=http://localhost:8080
     depends_on:
       - backend
     networks:

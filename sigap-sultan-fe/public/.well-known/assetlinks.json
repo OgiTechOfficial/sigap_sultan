@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "id.neracapangansulsel.twa",
+    "sha256_cert_fingerprints": ["33:8B:7C:B6:A2:7B:5A:5B:16:86:45:63:54:91:A0:7C:79:63:60:DD:D4:B7:B3:0D:14:79:2B:63:55:13:32:C2"]
+  }
+}]
