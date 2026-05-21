@@ -46,6 +46,25 @@ Jika semua container sudah berstatus *Up* (Bisa dicek dengan perintah `docker-co
 > [!TIP]
 > Jika Anda mengalami error terkait database *(Misalnya migrasi tabel kosong)* saat mengakses CMS/Backend, Anda dapat masuk ke dalam container masing-masing menggunakan Terminal Docker Desktop untuk menjalankan `php artisan migrate` atau proses *seeding* database.
 
+## Fixes Applied
+
+### 1. Hardcoded BASE_URL Causing API Image Fetch Failure
+- **Issue**: The frontend `next/image` component threw `ECONNREFUSED` during Server-Side Rendering when attempting to fetch images from `http://localhost:8000/...` (hardcoded in the database) because `localhost:8000` does not exist inside the Next.js Docker container.
+- **Fix**: Updated the `BASE_URL` in the PostgreSQL `prod.settings` table to `http://sigap_cms:8000` (the CMS container name). Updated `next.config.js` to use `remotePatterns` to explicitly allow `sigap_cms` on port `8000`. Cleared `.next` cache and restarted the frontend container.
+
+### 2. Backend City API 500 Error (Struct Scanning Mismatch)
+- **Issue**: The `/api/city` endpoint failed with `number of field descriptions must equal number of destinations, got 9 and 8`. This occurred because the database `tm_city` table has 9 columns (including `client_id`), but the Go `models.TmCity` struct is only defined for 8 fields.
+- **Fix**: Modified `SPBI-BACKEND-main/src/app/repositories/queries/tm_city_queries.go` to use explicit column names (e.g., `SELECT id, province_id...`) instead of `SELECT *` to guarantee exactly 8 columns are returned. Updated `tm_city_repository.go` to pass individual field pointers to `.Scan()` instead of the struct pointer. Recompiled the backend container.
+
+### 3. Frontend React Key Warnings
+- **Issue**: The browser console showed warnings for missing `key` props inside the `ComodityLastStock` component iterators.
+- **Fix**: Added proper `key` props to the `<Grid.Col>` and `<Group>` elements in `ComodityLastStock.tsx`.
+
+## Validation Results
+- The backend successfully returns a 200 OK for `/city` API queries.
+- The frontend successfully renders the map images without `Unconfigured Host` or `ECONNREFUSED` Next.js rendering crashes.
+- All navbar buttons and dynamic pages now properly hydrate.
+
 ### 4. Mematikan Server
 Jika Anda ingin mematikan semua server, cukup jalankan perintah:
 ```bash

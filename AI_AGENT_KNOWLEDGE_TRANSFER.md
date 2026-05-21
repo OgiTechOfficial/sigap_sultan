@@ -38,3 +38,20 @@
 - **Testing APIs:** You can hit `http://localhost:8080/city` or `http://localhost:8080/commodities` to verify backend data.
 - **Frontend State:** Most data is public. Protected routes (like `/dashboard/profile`) rely on the `useAuth` hook and a JWT token.
 - **Avoid Hardcoding Endpoints:** Use relative paths and Next.js rewrites when communicating with the backend.
+
+### E. Next.js SSR Image Fetch Crash
+- **Issue:** The buttons in the frontend navigation appeared broken (unclickable) because the Next.js page crashed during Server-Side Rendering (SSR). This was due to the `Image` component trying to fetch backend assets from `http://localhost:8000/assets...` (the `BASE_URL` defined in the DB). Since Next.js was running in a Docker container, it couldn't resolve `localhost:8000`.
+- **Fix Applied:**
+  - Updated the PostgreSQL `prod.settings` table to set `BASE_URL` to `http://sigap_cms:8000`.
+  - Added `sigap_cms` to `next.config.js` `images.domains` so the Next.js container can fetch images directly from the CMS container within the Docker network.
+
+### F. React Query Undefined Return Bug in Filters
+- **Issue:** In the dashboard filters (`NeracaFilter.tsx`, `PriceTableFilter.tsx`, `NeracaDetailFilter.tsx`), the `useQuery` hooks for fetching the latest dates (`price-latest-date-exist`, `price-detail-latest-date-exist`) had a `queryFn` that fetched data and mutated form/state values but did not return any value. This threw the React Query error: `"Query data cannot be undefined"`.
+- **Fix Applied:**
+  - Added `return result;` to the end of all these `queryFn` implementations.
+
+### G. Recharts defaultProps Console Warning Suppression
+- **Issue:** The visual graphs use Mantine Charts, which is built on top of `recharts`. Recharts uses deprecated `defaultProps` declarations on functional components (e.g. `XAxis`, `YAxis`), generating massive red warnings in the browser console under React 18+.
+- **Fix Applied:**
+  - Patched `console.error` inside `src/app/layouts/root/root.tsx` to dynamically ignore messages containing `"Support for defaultProps will be removed"`. This keeps the developer console clean and focused on actual project-level warnings.
+

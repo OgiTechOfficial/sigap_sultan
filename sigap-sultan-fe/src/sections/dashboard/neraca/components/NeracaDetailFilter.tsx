@@ -87,6 +87,8 @@ function NeracaDetailFilter(props: Props) {
         ...form.getValues(),
         date: new Date(result),
       });
+
+      return result;
     },
     enabled: !!form.getValues().commodityType,
   });

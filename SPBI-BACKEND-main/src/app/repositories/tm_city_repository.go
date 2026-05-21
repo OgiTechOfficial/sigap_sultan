@@ -184,7 +184,16 @@ func (repo TmCityRepository) GetByName(name string) (*models.TmCity, error) {
 		pgx.NamedArgs{
 			"name": name,
 		},
-	).Scan(&tmCity)
+	).Scan(
+		&tmCity.Id.Id,
+		&tmCity.ProvinceId,
+		&tmCity.Name,
+		&tmCity.CreatedAt,
+		&tmCity.UpdatedAt,
+		&tmCity.DeletedAt,
+		&tmCity.Sequence,
+		&tmCity.AssetsRelationId,
+	)
 	if err != nil {
 		return nil, err
 	}
@@ -216,7 +225,16 @@ func (repo TmCityRepository) GetById(id int) (*models.TmCity, error) {
 		pgx.NamedArgs{
 			"id": id,
 		},
-	).Scan(&tmCity)
+	).Scan(
+		&tmCity.Id.Id,
+		&tmCity.ProvinceId,
+		&tmCity.Name,
+		&tmCity.CreatedAt,
+		&tmCity.UpdatedAt,
+		&tmCity.DeletedAt,
+		&tmCity.Sequence,
+		&tmCity.AssetsRelationId,
+	)
 	if err != nil {
 		return nil, err
 	}

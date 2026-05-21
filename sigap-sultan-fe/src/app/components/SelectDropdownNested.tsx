@@ -66,7 +66,7 @@ function SelectDropdownNested<T>(props: Props<T>) {
         >
           {item.label}
         </Combobox.Option>
-        <Stack gap={0} mx="md">
+        <Stack gap={0} mx="md" key={`children-stack-${item.value as string}`}>
           {item.children
             ?.filter((item2) =>
               item2.label.toLowerCase().includes(search.toLowerCase().trim())

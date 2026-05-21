@@ -2,7 +2,7 @@ package queries
 
 const (
 	TmCityGet = `
-			SELECT * 
+			SELECT id, province_id, name, created_at, updated_at, deleted_at, sequence, assets_relation_id 
 			FROM tm_city
 			ORDER BY name
 			OFFSET @page
@@ -15,7 +15,7 @@ const (
 		`
 
 	TmCityGetByName = `
-			SELECT * 
+			SELECT id, province_id, name, created_at, updated_at, deleted_at, sequence, assets_relation_id 
 			FROM tm_city
 			WHERE LOWER(name) LIKE @name
 			ORDER BY sequence
@@ -30,7 +30,7 @@ const (
 		`
 
 	TmCityGetByProvinceId = `
-			SELECT * 
+			SELECT id, province_id, name, created_at, updated_at, deleted_at, sequence, assets_relation_id 
 			FROM tm_city
 			WHERE province_id = @provinceId
 			ORDER BY sequence
@@ -45,7 +45,7 @@ const (
 		`
 
 	TmCityGetById = `
-		SELECT * 
+		SELECT id, province_id, name, created_at, updated_at, deleted_at, sequence, assets_relation_id 
 		FROM tm_city
 		WHERE id = @id
 	`

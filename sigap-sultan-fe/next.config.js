@@ -4,9 +4,10 @@
 
 const nextConfig = {
   images: {
-    domains: [
-        'project.bi.sentech.id',
-        'localhost'
+    remotePatterns: [
+      { protocol: 'https', hostname: 'project.bi.sentech.id' },
+      { protocol: 'http', hostname: 'localhost' },
+      { protocol: 'http', hostname: 'sigap_cms', port: '8000' },
     ],
   },
   //basePath: '',

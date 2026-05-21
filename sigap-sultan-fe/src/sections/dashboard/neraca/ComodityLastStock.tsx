@@ -129,7 +129,7 @@ function ComodityLastStock(props: Props) {
         <Card withBorder p="sm" bg={"#F5FBFF"} mt="md" mb="md">
           <Group gap="md">
             {dataLastStockCommodityMap?.stockTierCode.map((stock) => (
-              <Group gap="sm">
+              <Group gap="sm" key={stock}>
                 <Card
                   bg={dataLastStockCommodityMap.stockTier[stock].color}
                   w={21}
@@ -240,13 +240,12 @@ function ComodityLastStock(props: Props) {
         <LoadingPageContainer isLoading={isLoadingLastStockCommodityList}>
           <Grid>
             {dataLastStockCommodityList?.stockPerCityPaginated.map(
-              (stockPage, index) => (
-                <Grid.Col span={{ sm: 12, md: 3 }}>
+              (stockPage, pageIndex) => (
+                <Grid.Col span={{ sm: 12, md: 3 }} key={`page-${pageIndex}`}>
                   <Grid>
-                    {stockPage.map((stock) => (
-                      <Grid.Col span={12}>
+                    {stockPage.map((stock, stockIndex) => (
+                      <Grid.Col span={12} key={`stock-${stock.city.id}-${stockIndex}`}>
                         <NeracaLastStockPerCityCardCompact
-                          key={index}
                           data={stock}
                           onSelect={() => onSelectCity(stock)}
                           stockTier={dataLastStockCommodityList.stockTier}
