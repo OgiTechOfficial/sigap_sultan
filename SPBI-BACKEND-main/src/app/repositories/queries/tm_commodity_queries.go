@@ -4,14 +4,14 @@ const (
 	TmCommodityList = `
 			SELECT a.id, a.client_id, a.parent_id, NULL::varchar as code, a.name, a.created_at, a.updated_at, a.deleted_at, a.assets_relation_id, a.sequence, a.unit_id, a.unit_id_neraca, b.name as unit_name 
 			FROM tm_commodity a
-			JOIN settings b ON b.id = a.unit_id 
+			LEFT JOIN settings b ON b.id = a.unit_id 
 			ORDER BY sequence
 		`
 
 	TmCommodityListNeraca = `
 			SELECT a.id, a.client_id, a.parent_id, NULL::varchar as code, a.name, a.created_at, a.updated_at, a.deleted_at, a.assets_relation_id, a.sequence, a.unit_id, a.unit_id_neraca, b.name as unit_name 
 			FROM tm_commodity a
-			JOIN settings b ON b.id = a.unit_id_neraca 
+			LEFT JOIN settings b ON b.id = a.unit_id_neraca 
 			ORDER BY sequence
 		`
 
@@ -25,7 +25,7 @@ const (
 	TmCommodityGetById = `
 			SELECT a.id, a.client_id, a.parent_id, NULL::varchar as code, a.name, a.created_at, a.updated_at, a.deleted_at, a.assets_relation_id, a.sequence, a.unit_id, a.unit_id_neraca, b.name as unit_name 
 			FROM tm_commodity a
-			JOIN settings b ON b.id = a.unit_id 
+			LEFT JOIN settings b ON b.id = a.unit_id 
 			WHERE a.id = @id
 		`
 
@@ -40,7 +40,7 @@ const (
 			FROM (
 			    SELECT a.id, a.client_id, a.parent_id, NULL::varchar as code, a.name, a.created_at, a.updated_at, a.deleted_at, a.assets_relation_id, a.sequence, a.unit_id, a.unit_id_neraca, b.name as unit_name 
 				FROM tm_commodity a
-				JOIN settings b ON b.id = a.unit_id 
+				LEFT JOIN settings b ON b.id = a.unit_id 
 				WHERE LOWER(a.name) LIKE @name 
 			) B
 		`
@@ -50,7 +50,7 @@ const (
 			FROM (
 			    SELECT a.id, a.client_id, a.parent_id, NULL::varchar as code, a.name, a.created_at, a.updated_at, a.deleted_at, a.assets_relation_id, a.sequence, a.unit_id, a.unit_id_neraca, b.name as unit_name 
 				FROM tm_commodity a
-				JOIN settings b ON b.id = a.unit_id 
+				LEFT JOIN settings b ON b.id = a.unit_id 
 				WHERE LOWER(a.name) = @name 
 			) B
 		`

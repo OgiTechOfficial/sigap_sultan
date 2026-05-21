@@ -17,6 +17,14 @@ const nextConfig = {
   compiler: {
     removeConsole: process.env.NODE_ENV !== "development", // Remove console.log in production
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: 'http://sigap_backend:8080/:path*', // Proxy to Backend container
+      },
+    ]
+  },
 };
 
 console.log('Base Path:', process.env.NEXT_PUBLIC_BASE_PATH);

@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"sigap-sultan-be/src/app"
 	"sigap-sultan-be/src/config"
@@ -22,6 +23,7 @@ func main() {
 	})
 
 	fiberApp.Use(
+		recover.New(),
 		cors.New(),
 		requestid.New(),
 		config.LogSetup(),

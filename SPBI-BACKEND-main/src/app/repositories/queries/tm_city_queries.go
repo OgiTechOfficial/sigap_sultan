@@ -4,7 +4,7 @@ const (
 	TmCityGet = `
 			SELECT * 
 			FROM tm_city
-			ORDER BY @orderBy @ascending
+			ORDER BY name
 			OFFSET @page
 			LIMIT @limit
 		`

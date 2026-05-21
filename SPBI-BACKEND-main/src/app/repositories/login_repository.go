@@ -24,9 +24,9 @@ func (repo *LoginRepository) Login(email string, password string) (interface{}, 
 	var result models.LoginResponse
 	err := repo.Db.QueryRow(
 		context.Background(),
-		`select tu.id as id, concat(tp.nama_depan, ' ', tp.nama_belakang) as name, tp.position_id as position_id, tp2.name as position from tm_user tu
-join tm_profile tp on tp.user_id = tu.id 
-join tm_position tp2 on tp2.id = tp.position_id 
+		`select tu.id as id, concat(tp.nama_depan, ' ', tp.nama_belakang) as name, COALESCE(tp.position_id, 0) as position_id, COALESCE(tp2.name, '') as position from tm_user tu
+left join tm_profile tp on tp.user_id = tu.id 
+left join tm_position tp2 on tp2.id = tp.position_id 
 where tu.email = @email and tu.password = @password`,
 		pgx.NamedArgs{
 			"email":    email,
@@ -192,8 +192,8 @@ func (repo *LoginRepository) Profile(id int) (interface{}, error) {
 	tp.position_id as jabatan_id,
     tp.organisasi,
     tp.bidang_unit_kerja
-   FROM prod.tm_user tu
-     JOIN prod.tm_profile tp ON tp.user_id = tu.id where tu.id = @id`,
+   FROM tm_user tu
+     LEFT JOIN tm_profile tp ON tp.user_id = tu.id where tu.id = @id`,
 		pgx.NamedArgs{
 			"id": id,
 		},
